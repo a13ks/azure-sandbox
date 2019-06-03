@@ -15,6 +15,7 @@ pool:
 steps:
 
 - script: |
+    choco install doxygen.install
     git submodule sync --recursive
     git submodule update --init --recursive
     cmake -G "Visual Studio 15 2017 Win64" -DGRPC_AS_SUBMODULE=ON -DgRPC_BUILD_TESTS=OFF -B$(Build.BinariesDirectory)
