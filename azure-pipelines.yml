@@ -17,15 +17,20 @@ steps:
 - script: |
     git submodule sync --recursive
     git submodule update --init --recursive
-    cmake -G "Visual Studio 15 2017 Win64" -DGRPC_AS_SUBMODULE=ON -DgRPC_BUILD_TESTS=OFF -B$(Build.BinariesDirectory)
-    cmake --build $(Build.BinariesDirectory)
-  displayName: 'Checkout and build'
+  displayName: 'Checkout'
+
+- task: CMake@1
+  inputs:
+    workingDirectory: 'build'
+    cmakeArgs:  -G "Visual Studio 15 2017 Win64" -DGRPC_AS_SUBMODULE=ON -DgRPC_BUILD_TESTS=OFF
+  displayName: 'Build'
 
 - task: CopyFiles@2
   inputs:
     sourceFolder: $(Build.BinariesDirectory)
     contents: 'Debug/**'
     targetFolder: $(Build.ArtifactStagingDirectory)
+
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: $(Build.ArtifactStagingDirectory)
