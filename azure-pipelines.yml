@@ -23,7 +23,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    contents: '$(Build.BinariesDirectory)\Debug\**'
+    contents: '$(Build.BinariesDirectory)/Debug/**'
     targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishBuildArtifacts@1
   inputs:
