@@ -20,3 +20,12 @@ steps:
     cmake -G "Visual Studio 15 2017 Win64" -DGRPC_AS_SUBMODULE=ON -DgRPC_BUILD_TESTS=OFF -B$(Build.BinariesDirectory)
     cmake --build $(Build.BinariesDirectory)
   displayName: 'Checkout and build'
+
+- task: CopyFiles@2
+  inputs:
+    contents: '$(Build.BinariesDirectory)\Debug\**'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: MyBuildOutputs
