@@ -22,11 +22,23 @@ steps:
     cmake --build $(Build.BinariesDirectory)
   displayName: 'Checkout and build'
 
-- task: CopyFiles@2
+# - task: CopyFiles@2
+#   inputs:
+#     sourceFolder: $(Build.BinariesDirectory)
+#     contents: 'Debug/**'
+#     targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: ArchiveFiles@2
   inputs:
-    sourceFolder: $(Build.BinariesDirectory)
-    contents: 'Debug/**'
-    targetFolder: $(Build.ArtifactStagingDirectory)
+    rootFolderOrFile: '$(Build.BinariesDirectory)' 
+    #includeRootFolder: true 
+    archiveType: 'zip' # Options: zip, 7z, tar, wim
+    #tarCompression: 'gz' # Optional. Options: gz, bz2, xz, none
+    archiveFile: '$(Build.ArtifactStagingDirectory)/test-$(Build.BuildId).zip' 
+    #replaceExistingArchive: true 
+    #verbose: # Optional
+    #quiet: # Optional
+
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: $(Build.ArtifactStagingDirectory)
