@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  name: Hosted VS2017
+  vmImage: 'vs2015-win2012r2'
   demands:
   - msbuild
   - cmake
@@ -17,7 +17,7 @@ steps:
 - script: |
     git submodule sync --recursive
     git submodule update --init --recursive
-    cmake -G "Visual Studio 15 2017 Win64" -DGRPC_AS_SUBMODULE=ON -DgRPC_BUILD_TESTS=OFF -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
+    cmake -G "Visual Studio 14 2015" -DGRPC_AS_SUBMODULE=ON -DgRPC_BUILD_TESTS=OFF -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
     cmake --build $(Build.BinariesDirectory) --target install
   displayName: 'Checkout and build'
 
