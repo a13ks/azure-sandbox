@@ -8,9 +8,9 @@ trigger:
 
 pool:
   vmImage: 'vs2015-win2012r2'
-  demands:
-  - msbuild
-  - cmake
+  # demands:
+  # - msbuild
+  # - cmake
 
 steps:
 
