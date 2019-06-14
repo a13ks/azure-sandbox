@@ -3,7 +3,22 @@
 
 void test(const char* str)
 {
-    DWORD attr = GetFileAttributesW(str);
+    DWORD attr = GetFileAttributesA(str);
+
+	if (attr == INVALID_FILE_ATTRIBUTES)
+	{
+		switch (GetLastError())
+		{
+		case ERROR_FILE_NOT_FOUND:
+		case ERROR_PATH_NOT_FOUND:
+		case ERROR_NOT_READY:
+		case ERROR_INVALID_DRIVE:
+			return;
+		default:
+			return;
+		}
+	}
+	return;
 }
 
 int main()
