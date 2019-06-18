@@ -42,7 +42,7 @@ steps:
     #buildId: # Required when buildType == Specific && BuildVersionToDownload == Specific
     #tags: # Optional
     #downloadType: 'single' # Options: single, specific
-    #artifactName: # Required when downloadType == Single
+    artifactName: 'Release'
     #itemPattern: '**' # Optional
     downloadPath: '$(Build.BinariesDirectory)' 
     #parallelizationLimit: '8' # Optional
