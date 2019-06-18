@@ -32,9 +32,9 @@ steps:
 # Download Build Artifacts
 - task: DownloadBuildArtifacts@0
   inputs:
-    buildType: 'current' # Options: current, specific
-    #project: # Required when buildType == Specific
-    pipeline: a13ks.bidstack-deps
+    buildType: 'specific' # Options: current, specific
+    project: 'bidstack-cpp-sdk' # Required when buildType == Specific
+    pipeline: 'a13ks.bidstack-deps'
     #specificBuildWithTriggering: false # Optional
     buildVersionToDownload: 'latest' # Required when buildType == Specific# Options: latest, latestFromBranch, specific
     #allowPartiallySucceededBuilds: false # Optional
@@ -42,7 +42,7 @@ steps:
     #buildId: # Required when buildType == Specific && BuildVersionToDownload == Specific
     #tags: # Optional
     #downloadType: 'single' # Options: single, specific
-    artifactName: 'Release'
+    artifactName: 'install'
     #itemPattern: '**' # Optional
     downloadPath: '$(Build.BinariesDirectory)' 
     #parallelizationLimit: '8' # Optional
