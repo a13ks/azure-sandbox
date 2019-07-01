@@ -78,6 +78,8 @@ stages:
   jobs:
   - job: B1
     steps:
+    - checkout: self
+      persistCredentials: true
     - script: |
         git tag v$(sdk.version)-$(Build.BuildId)
         git push origin v$(sdk.version)-$(Build.BuildId)
