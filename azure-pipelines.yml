@@ -5,15 +5,15 @@
 
 stages:
 - stage: A
-  trigger:
-    - master
+  # trigger:
+  #   - master
 
-  pool:
-    # vmImage: 'vs2015-win2012r2'
-    name: Hosted VS2017
-    demands:
-    - msbuild
-    - cmake
+  # pool:
+  #   # vmImage: 'vs2015-win2012r2'
+  #   name: Hosted VS2017
+  #   demands:
+  #   - msbuild
+  #   - cmake
 
   jobs:
   - job: A1
