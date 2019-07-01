@@ -3,20 +3,20 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- master
-
-pool:
-  # vmImage: 'vs2015-win2012r2'
-  name: Hosted VS2017
-  demands:
-  - msbuild
-  - cmake
-
 stages:
 - stage: A
   jobs:
   - job: A1
+    trigger:
+    - master
+
+    pool:
+      # vmImage: 'vs2015-win2012r2'
+      name: Hosted VS2017
+      demands:
+      - msbuild
+      - cmake
+
     steps:
       - script: |
           git submodule sync --recursive
