@@ -5,18 +5,18 @@
 
 stages:
 - stage: A
-  jobs:
-  - job: A1
-    trigger:
+  trigger:
     - master
 
-    pool:
-      # vmImage: 'vs2015-win2012r2'
-      name: Hosted VS2017
-      demands:
-      - msbuild
-      - cmake
+  pool:
+    # vmImage: 'vs2015-win2012r2'
+    name: Hosted VS2017
+    demands:
+    - msbuild
+    - cmake
 
+  jobs:
+  - job: A1
     steps:
       - script: |
           git submodule sync --recursive
