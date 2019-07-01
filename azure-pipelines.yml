@@ -77,4 +77,10 @@ stages:
 - stage: B
   jobs:
   - job: B1
+    steps:
+    - script: |
+        git tag v$(sdk.version)-$(Build.BuildId)
+        git push origin v$(sdk.version)-$(Build.BuildId)
+      displayName: 'Tag sources'
   condition: and(always(), eq(variables['sdk.tag_build'], 'yes'))
+  - job: B2
