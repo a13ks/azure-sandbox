@@ -77,4 +77,4 @@ stages:
 - stage: B
   jobs:
   - job: B1
-  - job: B2
+  condition: and(always(), eq(variables['sdk.tag_build'], 'yes'))
