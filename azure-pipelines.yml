@@ -3,10 +3,11 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+trigger:
+  - master
+
 stages:
 - stage: A
-  # trigger:
-  #   - master
 
   # pool:
   #   # vmImage: 'vs2015-win2012r2'
