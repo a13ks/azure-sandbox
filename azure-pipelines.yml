@@ -39,7 +39,7 @@ jobs:
     inputs:
       sourceFolder: $(Build.BinariesDirectory)
       # contents: 'Debug/**'
-      contents: '**'
+      contents: '*.zip'
       targetFolder: $(Build.ArtifactStagingDirectory)
 
   - task: ArchiveFiles@2
