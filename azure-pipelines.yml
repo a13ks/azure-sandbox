@@ -24,7 +24,6 @@ jobs:
     displayName: 'Checkout and build'
     
   - script: |
-      refreshenv
       cmake --build $(Build.BinariesDirectory) --target doc
       doxygen
       doxygen $(Build.BinariesDirectory)\doc\Doxyfile
