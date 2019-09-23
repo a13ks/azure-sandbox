@@ -52,6 +52,12 @@ jobs:
       #replaceExistingArchive: true 
       #verbose: # Optional
       #quiet: # Optional
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: $(Build.ArtifactStagingDirectory)
+      artifactName: MyBuildOutputs
+
 - job: A2
   dependsOn: A1
   steps:
