@@ -25,7 +25,7 @@ jobs:
     
   - script: |
       refreshenv
-      # cmake --build $(Build.BinariesDirectory) --target doc
+      cmake --build $(Build.BinariesDirectory) --target doc
       doxygen
       doxygen $(Build.BinariesDirectory)\doc\Doxyfile
     displayName: 'Preparing documentation'
