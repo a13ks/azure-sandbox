@@ -14,6 +14,10 @@ jobs:
     - cmake
   steps:
   - script: |
+      npm install doxygen
+    displayName: 'Installing dependencies'
+
+  - script: |
       git submodule sync --recursive
       git submodule update --init --recursive
       cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
