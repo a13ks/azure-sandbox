@@ -4,12 +4,11 @@ add_executable(test-app test.cpp)
 
 install(TARGETS test-app RUNTIME DESTINATION ${PROJECT_NAME}/app)
 
-
-find_package(Doxygen)
-
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
 
 return()
+
+find_package(Doxygen)
 
 if(DOXYGEN_FOUND)
   MESSAGE("Doxygen found")
