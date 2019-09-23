@@ -21,6 +21,10 @@ jobs:
       cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
       cmake --build $(Build.BinariesDirectory) --target install
     displayName: 'Checkout and build'
+    
+  - script: |
+      doxygen $(Build.SourcesDirectory)/Doxyfile
+    displayName: 'Preparing documentation'
 
   - task: CopyFiles@2
     inputs:

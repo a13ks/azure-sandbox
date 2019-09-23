@@ -7,9 +7,12 @@ install(TARGETS test-app RUNTIME DESTINATION ${PROJECT_NAME}/app)
 
 find_package(Doxygen)
 
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+
+return()
+
 if(DOXYGEN_FOUND)
-  MESSAGE("Doxygen not found")
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+  MESSAGE("Doxygen found")
   add_custom_target(doc ALL
     COMMAND "${DOXYGEN_EXECUTABLE}" "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile"
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/.."
