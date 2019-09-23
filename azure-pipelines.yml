@@ -16,7 +16,7 @@ jobs:
   - script: |
       git submodule sync --recursive
       git submodule update --init --recursive
-      cmake -G "Visual Studio 15 2017" -DGRPC_AS_SUBMODULE=ON -DgRPC_BUILD_TESTS=OFF -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
+      cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
       cmake --build $(Build.BinariesDirectory) --target install
     displayName: 'Checkout and build'
 
@@ -26,24 +26,6 @@ jobs:
       # contents: 'Debug/**'
       contents: '**'
       targetFolder: $(Build.ArtifactStagingDirectory)
-
-  # Download Build Artifacts
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: 'specific' # Options: current, specific
-      project: 'bidstack-cpp-sdk' # Required when buildType == Specific
-      pipeline: 'a13ks.bidstack-deps'
-      #specificBuildWithTriggering: false # Optional
-      buildVersionToDownload: 'latest' # Required when buildType == Specific# Options: latest, latestFromBranch, specific
-      #allowPartiallySucceededBuilds: false # Optional
-      #branchName: 'refs/heads/master' # Required when buildType == Specific && BuildVersionToDownload == LatestFromBranch
-      #buildId: # Required when buildType == Specific && BuildVersionToDownload == Specific
-      #tags: # Optional
-      #downloadType: 'single' # Options: single, specific
-      artifactName: 'Release'
-      #itemPattern: '**' # Optional
-      downloadPath: '$(Build.BinariesDirectory)' 
-      #parallelizationLimit: '8' # Optional
 
   # - task: ArchiveFiles@2
   #   inputs:
