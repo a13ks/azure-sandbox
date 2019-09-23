@@ -15,15 +15,13 @@ jobs:
       npm install -g doxygen
     displayName: 'Installing dependencies'
 
-  - script: |
-      git submodule sync --recursive
-      git submodule update --init --recursive
-      cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
-      cmake --build $(Build.BinariesDirectory) --target install
-    displayName: 'Checkout and build'
+  #- script: |
+  #    cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
+  #    cmake --build $(Build.BinariesDirectory) --target install
+  #  displayName: 'Checkout and build'
     
   - script: |
-      doxygen $(Build.SourcesDirectory)/Doxyfile
+      doxygen $(Build.BinariesDirectory)/Doxyfile
     displayName: 'Preparing documentation'
 
   - task: CopyFiles@2
