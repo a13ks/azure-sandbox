@@ -11,9 +11,19 @@ jobs:
     vmImage: 'vs2017-win2016'
 
   steps:
-  - script: |
-      npm install -g doxygen
-    displayName: 'Installing dependencies'
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        choco list --local-only
+    displayName: "List installed choco packages"
+
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        choco install doxygen.install
+    displayName: "Install dependencies"
 
   - script: |
       cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
