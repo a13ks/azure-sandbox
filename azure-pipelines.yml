@@ -32,7 +32,8 @@ jobs:
     
   - script: |
       refreshenv
-      cmake --build $(Build.BinariesDirectory) --target doc
+      # cmake --build $(Build.BinariesDirectory) --target doc
+      doxygen $(Build.BinariesDirectory)\doc\Doxyfile
     displayName: 'Preparing documentation'
 
   - task: CopyFiles@2
