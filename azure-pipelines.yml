@@ -15,13 +15,6 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |
-        choco list --local-only
-    displayName: "List installed choco packages"
-
-  - task: PowerShell@2
-    inputs:
-      targetType: 'inline'
-      script: |
         choco install doxygen.install
     displayName: "Install dependencies"
 
