@@ -12,7 +12,7 @@ jobs:
 
   steps:
   - script: |
-      npm install doxygen
+      npm install -g doxygen
     displayName: 'Installing dependencies'
 
   - script: |
