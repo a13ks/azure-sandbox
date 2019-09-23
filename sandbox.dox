@@ -1,0 +1,44 @@
+/**
+* @mainpage Sandbox Manual
+*
+* @section Introduction
+* This is just an intro secion with reference example, see @ref page2.
+*
+* @section Content
+* - @ref page1
+* - @ref page2
+* - @ref page3
+*
+* @image html logo.png
+*
+* @page copyright Copyright
+* © 2019 All rights reserved.
+*
+* No part of this document may be reproduced in any written, electronic, recording, or photocopying without
+* written permission of the publisher or author. The exception would be in the case of brief quotations embodied
+* in the critical articles or reviews and pages where permission is specifically granted by the publisher or author.
+* Although every precaution has been taken to verify the accuracy of the information contained herein, the author
+* and publisher assume no responsibility for any errors or omissions. No liability is assumed for damages that may
+* result from the use of information contained within.
+*
+* @page page1 Just enumeration
+* Enumeration:
+*
+* - Entry 1
+* - Entry 2
+*
+* @page page2 Usage example
+* This is just cpp code example
+* @code{.cpp}
+* #include <sandbox.h>
+*
+* {
+*     printf( "Sandbox works!\n" );
+* }
+* @endcode
+*
+* @page page3 Sequence diagram
+* The diagram
+* @image html diag.png
+*
+*/
