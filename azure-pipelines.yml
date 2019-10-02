@@ -11,9 +11,8 @@ jobs:
     vmImage: 'vs2017-win2016'
 
   steps:
-  - template: test-template.yml
+    - template: test-template.yml
 
-  steps:
     - task: Bash@3
       inputs:
         targetType: 'inline'
