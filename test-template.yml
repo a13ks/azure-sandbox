@@ -3,7 +3,8 @@ steps:
     inputs:
       targetType: 'inline'
       script: 
-        echo 1 $MYSECRET
-        echo "##vso[task.setvariable variable=FOO]this is my value"
+        echo "1 $MYSECRET"
+        export var1=`cat test.txt`
+        echo "##vso[task.setvariable variable=foo.bar]111 this is my value 222 $(var1) 333"
     env:
       MYSECRET: 'HELLO WORLD'

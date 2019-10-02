@@ -16,7 +16,7 @@ jobs:
   - task: Bash@3
     inputs:
       targetType: 'inline'
-      script: echo "this is my value from another script $(FOO)"
+      script: echo "this is my value from another script $(foo.bar)"
 
   - task: PowerShell@2
     inputs:
