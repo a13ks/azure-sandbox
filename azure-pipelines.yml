@@ -22,8 +22,8 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |
-        choco install doxygen.install
-    displayName: "Install dependencies"
+        Import-PfxCertificate -FilePath dummy.pfx -CertStoreLocation Cert:\LocalMachine\My
+    displayName: "Install cert"
 
   - script: |
       cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
