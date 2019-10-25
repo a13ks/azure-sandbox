@@ -22,17 +22,15 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |
+        $file = "$env:windir\System32\drivers\etc\hosts"
+        "127.0.0.1 www.this-is-test-host.com" | Add-Content -PassThru $file
         Import-PfxCertificate -FilePath dummy.pfx -CertStoreLocation Cert:\LocalMachine\My
-    displayName: "Install cert"
+    displayName: "Install cert and add dns"
 
   - script: |
       cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
       cmake --build $(Build.BinariesDirectory) --target install
     displayName: 'Checkout and build'
-    
-  - script: |
-      cmake --build $(Build.BinariesDirectory) --target doc
-    displayName: 'Preparing documentation'
 
   - task: CopyFiles@2
     inputs:
