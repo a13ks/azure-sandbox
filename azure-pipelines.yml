@@ -64,4 +64,11 @@ jobs:
   - A2
   condition: or(failed('A1'), failed('A2'))
   steps:
-  - script: echo this will run when B runs and succeeds
+  - script: |
+      echo A1 or A2 failed
+      echo Build.SourceBranchName $(Build.SourceBranchName)
+      echo Build.SourceVersion $(Build.SourceVersion)
+      echo Build.QueuedBy $(Build.QueuedBy)
+      echo Build.BuildUri $(Build.BuildUri)
+      echo Build.RequestedFor $(Build.RequestedFor)
+      echo Build.RequestedForEmail $(Build.RequestedForEmail)
