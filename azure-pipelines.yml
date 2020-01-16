@@ -62,6 +62,6 @@ jobs:
   dependsOn:
   - A1
   - A2
-  condition: failed('A1') or failed('A2')
+  condition: or(failed('A1'), failed('A2'))
   steps:
   - script: echo this will run when B runs and succeeds
