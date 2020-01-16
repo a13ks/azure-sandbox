@@ -72,3 +72,5 @@ jobs:
       echo Build.BuildUri $(Build.BuildUri)
       echo Build.RequestedFor $(Build.RequestedFor)
       echo Build.RequestedForEmail $(Build.RequestedForEmail)
+      echo Build.Reason $(Build.Reason)
+      echo Build.Repository.Uri $(Build.Repository.Uri)
