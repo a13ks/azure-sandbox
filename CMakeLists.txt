@@ -4,4 +4,4 @@ add_executable(test-app test.cpp)
 
 install(TARGETS test-app RUNTIME DESTINATION ${PROJECT_NAME}/app)
 
-add_subdirectory(doc)
+# add_subdirectory(doc)

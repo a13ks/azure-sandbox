@@ -1,5 +1,6 @@
 #include <string>
 #include <windows.h>
+#include <stdio.h>
 
 void test(const char* str)
 {
@@ -21,9 +22,14 @@ void test(const char* str)
 	return;
 }
 
-int main()
+int main(int argc, char **argv)
 {
-    std::string test_str("123");
-    test(test_str.c_str());
+	if (argc < 2)
+	{
+		printf("Goodbye!\n");
+		return 1;
+	}
+
+	printf("Hello, %s!\n", argv[1]);
     return 0;
 }

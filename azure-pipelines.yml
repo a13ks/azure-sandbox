@@ -33,9 +33,15 @@ jobs:
     displayName: 'Add ssl cert'
 
   - script: |
-      # cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
+      cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
       cmake --build $(Build.BinariesDirectory) --target install
+      echo "##vso[task.setvariable variable=var1]$(Build.BinariesDirectory)/Debug/test-app.exe"
+      echo "##vso[task.setvariable variable=var2]Debug/test-app.exe"
     displayName: 'Checkout and build'
+    
+  - powershell: |
+      $(var1) test1
+      $(Build.BinariesDirectory)/$(var2) test2
 
   - task: CopyFiles@2
     inputs:
