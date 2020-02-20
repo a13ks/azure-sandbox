@@ -40,7 +40,8 @@ jobs:
     displayName: 'Checkout and build'
 
   - powershell: |
-      Invoke-Expression $var1
+      Invoke-Expression "& $(var1)"
+      & $(var1)
 
   - task: CopyFiles@2
     inputs:
