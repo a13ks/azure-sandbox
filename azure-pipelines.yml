@@ -42,8 +42,10 @@ jobs:
     enabled: true
 
   - script: |
+      alias fail="'echo "##vso[task.complete result=Failed;]" && echo "##vso[task.logissue type=error]my error msg"'
       $(Build.BinariesDirectory)\Debug\test-app.exe || echo "##vso[task.logissue type=error]Command 1 failed"
       $(Build.BinariesDirectory)\Debug\test-app.exe World! || echo "##vso[task.logissue type=error]Command 2 failed"
+      fail
     enabled: true
 
   - script: |
@@ -53,8 +55,10 @@ jobs:
     enabled: false
 
   - script: |
+      alias fail="'echo "##vso[task.complete result=Failed;]" && echo "##vso[task.logissue type=error]my error msg"'
       $(Build.BinariesDirectory)/Debug/test-app || echo "##vso[task.logissue type=error]Command 1 failed"
       $(Build.BinariesDirectory)/Debug/test-app World! || echo "##vso[task.logissue type=error]Command 2 failed"
+      fail
     enabled: false
 
 
