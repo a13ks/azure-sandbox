@@ -1,6 +1,9 @@
 #include <string>
-#include <windows.h>
 #include <stdio.h>
+
+#if _WIN32
+
+#include <windows.h>
 
 void test(const char* str)
 {
@@ -21,6 +24,8 @@ void test(const char* str)
 	}
 	return;
 }
+
+#endif
 
 int main(int argc, char **argv)
 {
