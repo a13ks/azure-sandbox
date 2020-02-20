@@ -37,12 +37,14 @@ jobs:
   - script: |
       cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
       cmake --build $(Build.BinariesDirectory) --target install
-      echo ##vso[task.setvariable variable=var_name_test]$(Build.BinariesDirectory)\Debug\test-app.exe
+      echo "##vso[task.setvariable variable=var_name_test]$(Build.BinariesDirectory)\Debug\test-app.exe"
+      echo ##vso[task.setvariable variable=var1]value1
     displayName: 'Checkout and build'
 
   - script: |
-      ${{var_name_test}} || echo "##vso[task.logissue type=error]Command 1 failed"
-      ${{var_name_test}} World! || echo "##vso[task.logissue type=error]Command 2 failed"
+      $(var_name_test) || echo "##vso[task.logissue type=error]Command 1 failed"
+      $(var_name_test) World! || echo "##vso[task.logissue type=error]Command 2 failed"
+      echo Var1: $(var1)
 
   - task: CopyFiles@2
     inputs:
