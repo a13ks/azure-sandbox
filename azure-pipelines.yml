@@ -8,7 +8,7 @@ trigger:
 jobs:
 - job: A1
   pool:
-    vmImage: 'vs2017-win2016'
+    vmImage: 'macOS-10.13'
 
   steps:
   - template: test-template.yml
@@ -27,10 +27,12 @@ jobs:
         Import-PfxCertificate -FilePath dummy.pfx -CertStoreLocation Cert:\LocalMachine\My
         # Add-NetIPHttpsCertBinding -IpPort "0.0.0.0:8443" -CertificateHash "8b7ac7e842997e14782c8f6e2f789a3fe3f0a171" -CertificateStoreName "My" -ApplicationId "{00000000-0000-0000-0000-000000000000}"
     displayName: "Install cert and add dns"
+    enabled: false
 
   - script: |
       netsh http add sslcert ipport=0.0.0.0:8443 certhash=8b7ac7e842997e14782c8f6e2f789a3fe3f0a171 appid={00000000-0000-0000-0000-000000000000}
     displayName: 'Add ssl cert'
+    enabled: false
 
   - script: |
       cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
@@ -38,10 +40,9 @@ jobs:
       echo ##vso[task.setvariable variable=var-name_test]$(Build.BinariesDirectory)\Debug\test-app.exe
     displayName: 'Checkout and build'
 
-  - powershell: |
-      $(var-name_test)
-      "$(var-name_test) World!"
-    ignoreLASTEXITCODE: false
+  - script: |
+      $(var-name_test) || echo "##vso[task.logissue type=error]Command 1 failed"
+      "$(var-name_test) World!" || echo "##vso[task.logissue type=error]Command 1 failed"
 
   - task: CopyFiles@2
     inputs:
