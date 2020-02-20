@@ -38,15 +38,25 @@ jobs:
   - script: |
       cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
       cmake --build $(Build.BinariesDirectory) --target install
-      echo "##vso[task.setvariable variable=var_name_test;]$(Build.BinariesDirectory)\Debug\test-app.exe"
-      echo "##vso[task.setvariable variable=var1;]value 1"
     displayName: 'Checkout and build'
+    enabled: true
 
-  - bash: |
-      echo Print1: $(var_name_test)
-      $(var_name_test) || echo "##vso[task.logissue type=error]Command 1 failed"
-      $(var_name_test) World! || echo "##vso[task.logissue type=error]Command 2 failed"
-      echo Print2: $(var1)
+  - script: |
+      $(Build.BinariesDirectory)\Debug\test-app.exe || echo "##vso[task.logissue type=error]Command 1 failed"
+      $(Build.BinariesDirectory)\Debug\test-app.exe World! || echo "##vso[task.logissue type=error]Command 2 failed"
+    enabled: true
+
+  - script: |
+      cmake -G "Unix Makefiles" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
+      cmake --build $(Build.BinariesDirectory) --target install
+    displayName: 'Checkout and build'
+    enabled: false
+
+  - script: |
+      $(Build.BinariesDirectory)/Debug/test-app || echo "##vso[task.logissue type=error]Command 1 failed"
+      $(Build.BinariesDirectory)/Debug/test-app World! || echo "##vso[task.logissue type=error]Command 2 failed"
+    enabled: false
+
 
   - task: CopyFiles@2
     inputs:
