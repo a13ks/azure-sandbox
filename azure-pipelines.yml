@@ -41,8 +41,8 @@ jobs:
     displayName: 'Checkout and build'
 
   - script: |
-      ${var_name_test} || echo "##vso[task.logissue type=error]Command 1 failed"
-      ${var_name_test} World! || echo "##vso[task.logissue type=error]Command 2 failed"
+      $(var_name_test) || echo "##vso[task.logissue type=error]Command 1 failed"
+      $(var_name_test) World! || echo "##vso[task.logissue type=error]Command 2 failed"
 
   - task: CopyFiles@2
     inputs:
