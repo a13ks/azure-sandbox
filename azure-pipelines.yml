@@ -40,10 +40,8 @@ jobs:
     displayName: 'Checkout and build'
 
   - powershell: |
-      ${{var1}} test1
-      $(Build.BinariesDirectory)/${{var2}} test2
-      ${{var2}} test3
-      test-app.exe test4
+      Write-Output "1 test output $(var1)"
+      Write-Output "2 test output $(var2)"
 
   - task: CopyFiles@2
     inputs:
