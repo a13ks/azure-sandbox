@@ -41,8 +41,6 @@ jobs:
 
   - powershell: |
       Invoke-Expression "$(var1)"
-      Write-Output "1 test output $(var1)"
-      Write-Output "2 test output $(var2)"
 
   - task: CopyFiles@2
     inputs:
