@@ -40,7 +40,10 @@ jobs:
     displayName: 'Checkout and build'
 
   - powershell: |
+      $(var1)
       "$(var1) World!"
+      $(var1)
+    ignoreLASTEXITCODE: false
 
   - task: CopyFiles@2
     inputs:
