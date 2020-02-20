@@ -8,7 +8,8 @@ trigger:
 jobs:
 - job: A1
   pool:
-    vmImage: 'macOS-10.13'
+    # vmImage: 'macOS-10.13'
+    vmImage: 'vs2017-win2016'
 
   steps:
   - template: test-template.yml
@@ -35,11 +36,11 @@ jobs:
     enabled: false
 
   - script: |
-      # cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
-      cmake -G "Unix Makefiles" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
+      cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
+      # cmake -G "Unix Makefiles" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
       cmake --build $(Build.BinariesDirectory) --target install
-      # echo "##vso[task.setvariable variable=var_name_test;]$(Build.BinariesDirectory)\Debug\test-app.exe"
-      echo "##vso[task.setvariable variable=var_name_test;]$(Build.BinariesDirectory)/test-app"
+      echo "##vso[task.setvariable variable=var_name_test;]$(Build.BinariesDirectory)\Debug\test-app.exe"
+      # echo "##vso[task.setvariable variable=var_name_test;]$(Build.BinariesDirectory)/test-app"
       echo "##vso[task.setvariable variable=var1;]value 1"
     displayName: 'Checkout and build'
 
