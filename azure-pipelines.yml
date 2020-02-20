@@ -42,7 +42,7 @@ jobs:
   - powershell: |
       $(var1)
       "$(var1) World!"
-    ignoreLASTEXITCODE: false
+    ignoreLASTEXITCODE: true
 
   - task: CopyFiles@2
     inputs:
