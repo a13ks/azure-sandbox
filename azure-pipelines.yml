@@ -8,8 +8,8 @@ trigger:
 jobs:
 - job: A1
   pool:
-    # vmImage: 'macOS-10.13'
-    vmImage: 'vs2017-win2016'
+    vmImage: 'macOS-10.13'
+    # vmImage: 'vs2017-win2016'
 
   steps:
   - template: test-template.yml
@@ -39,11 +39,11 @@ jobs:
       cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
       cmake --build $(Build.BinariesDirectory) --target install
     displayName: 'Checkout and build'
-    enabled: true
+    enabled: false
 
   - script: |
       $(Build.BinariesDirectory)\Debug\test-app.exe && $(Build.BinariesDirectory)\Debug\test-app.exe World!
-    enabled: true
+    enabled: false
 
   - script: |
       cmake -G "Unix Makefiles" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
@@ -54,7 +54,12 @@ jobs:
   - script: |
       $(Build.BinariesDirectory)/test-app && $(Build.BinariesDirectory)/test-app World!
     enabled: false
-
+    
+  - script: |
+      $(Build.BinariesDirectory)/test-app && $(Build.BinariesDirectory)/test-app World!
+      echo Hello World > file.txt
+      ( if [ `cat file.txt | tail -n 1` != "RETURN=0" ]; then exit 1; else exit 0; fi )
+    enabled: true
 
   - task: CopyFiles@2
     inputs:
