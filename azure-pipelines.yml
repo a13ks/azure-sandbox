@@ -8,8 +8,8 @@ trigger:
 jobs:
 - job: A1
   pool:
-    vmImage: 'macOS-10.13'
-    # vmImage: 'vs2017-win2016'
+    # vmImage: 'macOS-10.13'
+    vmImage: 'vs2017-win2016'
 
   steps:
   - template: test-template.yml
@@ -39,21 +39,21 @@ jobs:
       cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
       cmake --build $(Build.BinariesDirectory) --target install
     displayName: 'Checkout and build'
-    enabled: false
+    enabled: true
 
   - script: |
-      $(Build.BinariesDirectory)\Debug\test-app.exe && $(Build.BinariesDirectory)\Debug\test-app.exe World! || echo ##vso[task.complete result=Failed;] && echo ##vso[task.logissue type=error]my error msg 1
-    enabled: false
+      $(Build.BinariesDirectory)\Debug\test-app.exe && $(Build.BinariesDirectory)\Debug\test-app.exe World!
+    enabled: true
 
   - script: |
       cmake -G "Unix Makefiles" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
       cmake --build $(Build.BinariesDirectory) --target install
     displayName: 'Checkout and build'
-    enabled: true
+    enabled: false
 
   - script: |
       $(Build.BinariesDirectory)/test-app && $(Build.BinariesDirectory)/test-app World!
-    enabled: true
+    enabled: false
 
 
   - task: CopyFiles@2
