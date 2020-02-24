@@ -46,10 +46,24 @@ jobs:
     enabled: false
 
   - script: |
-      cmake -G "Unix Makefiles" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
+      cmake -G "Unix Makefiles" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install\
+       -DCMAKE_OSX_ARCHITECTURES=x86_64 \
+       -DCMAKE_OSX_SYSROOT=iphonesimulator \
+       -DCMAKE_OSX_DEPLOYMENT_TARGET=11 \
+       -DCMAKE_CROSSCOMPILING=ON
       cmake --build $(Build.BinariesDirectory) --target install
     displayName: 'Checkout and build'
-    enabled: false
+    enabled: true
+    
+  - bash: |
+      UUID=`xcrun simctl list | grep 'iPhone X' | cut -d'(' -f2 | cut -d')' -f1 | grep -v apple | head -n 1`
+      echo "Starting emulator"
+      xcrun simctl boot $UUID && echo OK
+      echo "Installing application"
+      xcrun simctl install booted $(Build.BinariesDirectory)/test-app.app
+    displayName: 'Run unit tests'
+    timeoutInMinutes: 1
+    enabled: true
 
   - script: |
       $(Build.BinariesDirectory)/test-app && $(Build.BinariesDirectory)/test-app World!
@@ -59,7 +73,7 @@ jobs:
       $(Build.BinariesDirectory)/test-app && $(Build.BinariesDirectory)/test-app World!
       echo Hello World > file.txt
       ( if [ `cat file.txt | tail -n 1` != "RETURN=0" ]; then exit 1; else exit 0; fi )
-    enabled: true
+    enabled: falses
 
   - task: CopyFiles@2
     inputs:
