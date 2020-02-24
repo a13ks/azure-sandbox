@@ -60,7 +60,8 @@ jobs:
       echo "Starting emulator"
       xcrun simctl boot $UUID && echo OK
       echo "Installing application"
-      xcrun simctl install booted $(Build.BinariesDirectory)/test-app.app
+      xcrun simctl install booted $(Build.BinariesDirectory)/test-app.app && echo OK
+      xcrun simctl launch --console booted org.test.app && echo OK
     displayName: 'Run unit tests'
     timeoutInMinutes: 1
     enabled: true
