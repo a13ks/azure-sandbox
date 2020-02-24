@@ -6,7 +6,7 @@ install(TARGETS test-app RUNTIME DESTINATION ${PROJECT_NAME}/app)
 
 # add_subdirectory(doc)
 
-if(SYSROOT_LOWER MATCHES "iphoneos" OR SYSROOT_LOWER MATCHES "iphonesimulator")
+if(CMAKE_OSX_SYSROOT MATCHES "iphonesimulator")
   set_target_properties(test-app PROPERTIES 
     MACOSX_BUNDLE ON
     MACOSX_FRAMEWORK_IDENTIFIER  org.test.app
