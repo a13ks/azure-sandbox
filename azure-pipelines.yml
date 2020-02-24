@@ -61,7 +61,7 @@ jobs:
       xcrun simctl boot $UUID && echo OK
       echo "Installing application"
       xcrun simctl install booted $(Build.BinariesDirectory)/test-app.app && echo OK
-      xcrun simctl launch booted org.test.app && echo OK
+      xcrun simctl launch --console-pty booted org.test.app
     displayName: 'Run unit tests'
     timeoutInMinutes: 1
     enabled: true
