@@ -57,7 +57,7 @@ jobs:
     
   - bash: |
       xcrun simctl list
-      UUID=`xcrun simctl list | grep 'iPhone X' | cut -d'(' -f2 | cut -d')' -f1 | grep -v apple | head -n 1`
+      UUID=`xcrun simctl list | grep 'iPhone 11' | cut -d'(' -f2 | cut -d')' -f1 | grep -v apple | head -n 1`
       echo "Starting emulator"
       xcrun simctl boot $UUID && echo OK
       echo "Installing application"
