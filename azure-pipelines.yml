@@ -8,7 +8,7 @@ trigger:
 jobs:
 - job: A1
   pool:
-    vmImage: 'macOS-10.13'
+    vmImage: 'macOS-10.14'
     # vmImage: 'vs2017-win2016'
 
   steps:
@@ -56,6 +56,7 @@ jobs:
     enabled: true
     
   - bash: |
+      xcrun simctl list
       UUID=`xcrun simctl list | grep 'iPhone X' | cut -d'(' -f2 | cut -d')' -f1 | grep -v apple | head -n 1`
       echo "Starting emulator"
       xcrun simctl boot $UUID && echo OK
