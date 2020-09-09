@@ -8,7 +8,7 @@ trigger:
 jobs:
 - job: A1
   pool:
-    vmImage: 'macOS-10.14'
+    vmImage: 'macOS-10.15'
     # vmImage: 'vs2017-win2016'
 
   steps:
@@ -53,6 +53,12 @@ jobs:
        -DCMAKE_CROSSCOMPILING=ON
       cmake --build $(Build.BinariesDirectory) --target install
     displayName: 'Checkout and build'
+    enabled: true
+
+  - bash: |
+      xcrun simctl list runtimes
+    displayName: 'List Apple simulator runtimes'
+    timeoutInMinutes: 1
     enabled: true
     
   - bash: |
