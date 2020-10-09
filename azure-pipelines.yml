@@ -8,8 +8,8 @@ trigger:
 jobs:
 - job: A1
   pool:
-    vmImage: 'macOS-10.15'
-    # vmImage: 'vs2017-win2016'
+    # vmImage: 'macOS-10.15'
+    vmImage: 'vs2017-win2016'
 
   steps:
   - template: test-template.yml
@@ -38,12 +38,12 @@ jobs:
   - script: |
       cmake -G "Visual Studio 15 2017" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install
       cmake --build $(Build.BinariesDirectory) --target install
-    displayName: 'Checkout and build'
-    enabled: false
+    displayName: 'Checkout and build for win64'
+    enabled: true
 
   - script: |
       $(Build.BinariesDirectory)\Debug\test-app.exe && $(Build.BinariesDirectory)\Debug\test-app.exe World!
-    enabled: false
+    enabled: true
 
   - script: |
       cmake -G "Unix Makefiles" -B$(Build.BinariesDirectory) -DCMAKE_INSTALL_PREFIX=$(Build.BinariesDirectory)/install\
@@ -52,14 +52,14 @@ jobs:
        -DCMAKE_OSX_DEPLOYMENT_TARGET=11 \
        -DCMAKE_CROSSCOMPILING=ON
       cmake --build $(Build.BinariesDirectory) --target install
-    displayName: 'Checkout and build'
-    enabled: true
+    displayName: 'Checkout and build for osx'
+    enabled: false
 
   - bash: |
       xcrun simctl list runtimes
     displayName: 'List Apple simulator runtimes'
     timeoutInMinutes: 1
-    enabled: true
+    enabled: false
     
   - bash: |
       xcrun simctl list
@@ -71,7 +71,7 @@ jobs:
       xcrun simctl launch --console-pty booted org.test.app
     displayName: 'Run unit tests'
     timeoutInMinutes: 1
-    enabled: true
+    enabled: false
 
   - script: |
       $(Build.BinariesDirectory)/test-app && $(Build.BinariesDirectory)/test-app World!
@@ -97,6 +97,7 @@ jobs:
 
 - job: A2
   dependsOn: A1
+  enabled: false
   steps:
     - checkout: none
     - task: PublishBuildArtifacts@1
@@ -105,6 +106,7 @@ jobs:
         artifactName: MyBuildOutputs
 
 - job: A3
+  enabled: false
   dependsOn:
   - A1
   - A2
