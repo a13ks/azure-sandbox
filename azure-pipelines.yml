@@ -97,7 +97,7 @@ jobs:
 
 - job: A2
   dependsOn: A1
-  condition: never()
+  condition: eq(true, false)
   steps:
     - checkout: none
     - task: PublishBuildArtifacts@1
@@ -106,7 +106,7 @@ jobs:
         artifactName: MyBuildOutputs
 
 - job: A3
-  condition: never()
+  condition: eq(true, false)
   dependsOn:
   - A1
   - A2
