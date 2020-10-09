@@ -110,7 +110,7 @@ jobs:
   dependsOn:
   - A1
   - A2
-  condition: or(failed('A1'), failed('A2'))
+  # condition: or(failed('A1'), failed('A2'))
   steps:
   - script: |
       echo A1 or A2 failed
